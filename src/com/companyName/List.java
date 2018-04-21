@@ -1,23 +1,35 @@
 package com.companyName;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class List {
+public class List implements Serializable {
 
-//    private String inputFile;
+    private ArrayList list;
 
-    private ArrayList<String> list;
-
-    public List(String inputFile) {
-        readListFromFile(inputFile);
+    List(String inputFile) {
+        this.list = readListFromFile(inputFile);
     }
 
-    public void readListFromFile(String s) {
-        File input = new File(s);
+    private ArrayList readListFromFile(String inputFile) {
+//        throws IOException {
+//            FileInputStream fin = null;
+//            ObjectInputStream ois = null;
+//            try {
+//                fin = new FileInputStream(inputFile);
+//                ois = new ObjectInputStream(fin);
+//                list = (ArrayList<String>) ois.readObject();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            ois.close();
+//            fin.close();
+//            return list;
+
+        File input = new File(inputFile);
         Scanner scanner = null;
+        ArrayList list = new ArrayList();
         try {
             scanner = new Scanner(input);
         } catch (FileNotFoundException e) {
@@ -25,15 +37,29 @@ public class List {
             System.out.print("Cannot find specified input file.");
             System.exit(1);
         }
-        while (scanner.hasNext()) {
-            String item = scanner.next();
-            System.out.println("dodaje " + item);
+        while (scanner.hasNextLine()) {
+            String item = scanner.nextLine();
             list.add(item);
         }
         scanner.close();
+        return list;
+        }
+
+    public void writeListToFile (String outputFile) {
+
     }
 
-    public ArrayList<String> getList() {
+    public void initializeFileIfNotExists(String outputFile)
+            throws IOException {
+        File registry = new File(outputFile);
+        boolean created = registry.createNewFile();
+        if (created) {
+            list = new ArrayList<>();
+//            writeListToFile(outputFile);
+        }
+    }
+
+    public ArrayList getList() {
         return list;
     }
 }

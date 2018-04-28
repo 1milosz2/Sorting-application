@@ -1,20 +1,19 @@
 package com.companyName;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Main {
-    public static void main (String [] args) throws IOException {
+    public static void main (String [] args) {
 
-        String mode = args [0];
         String inputFile = args [1];
         String outputFile = args [2];
 
-        List list = new List(inputFile);
+        List myList = new List(inputFile);
 
-        list.initializeFileIfNotExists(outputFile);
+        myList.initializeFileIfNotExists(outputFile);
+        myList.selectSort();
+        myList.writeListToFile(outputFile, myList);
 
-        list.writeListToFile(outputFile);
-
-        System.out.println("I'll sort by " + mode + ", take data from " + inputFile + " and export outcome to " + outputFile);
     }
 }

@@ -24,8 +24,8 @@ public class Main {
 
         long elapsedTime = System.nanoTime() - startTime;
 
-        myList.writeListToFile(outputFile, myList);
-        System.out.println("Output file has been created. Sorting took " + elapsedTime + " nano sec");
+        myList.writeListToFile();
+        System.out.println("Output file has been created. Sorting took " + elapsedTime + " nanoseconds");
     }
 
     private static SortingType resolveCommand(String[] args) {
@@ -38,7 +38,6 @@ public class Main {
             return SortingType.SELECTION;
         } else
             throw new IllegalArgumentException("ADD, DELETE or LIST command expected");
-
     }
 
     private static String initializeOutputFileName(String[] args) {

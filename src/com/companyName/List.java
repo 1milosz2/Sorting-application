@@ -8,18 +8,21 @@ import java.util.Scanner;
 public class List implements Serializable {
 
     private ArrayList<String> list;
+    private String input;
+    private String output;
 
     List(String inputFile, String outputFile) {
-        this.list = readListFromFile(inputFile);
-        initializeFileIfNotExists(outputFile);
+        this.input = inputFile;
+        this.output = outputFile;
+        this.list = readListFromFile();
     }
 
-    private ArrayList<String> readListFromFile(String inputFile) {
-        File input = new File(inputFile);
+    private ArrayList<String> readListFromFile() {
+        File inputFile = new File(input);
         Scanner scanner = null;
         ArrayList<String> list = new ArrayList<>();
         try {
-            scanner = new Scanner(input);
+            scanner = new Scanner(inputFile);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.out.print("Cannot find specified input file.");
@@ -33,11 +36,12 @@ public class List implements Serializable {
         return list;
     }
 
-    public void writeListToFile(String outputFile, List list) {
+    public void writeListToFile() {
+        initializeOutputFileIfNotExists();
         FileWriter writer;
         try {
-            writer = new FileWriter(outputFile);
-            for (String str : list.getList()) {
+            writer = new FileWriter(output);
+            for (String str : list) {
                 writer.write(str);
                 writer.write(System.lineSeparator());
             }
@@ -47,8 +51,8 @@ public class List implements Serializable {
         }
     }
 
-    private void initializeFileIfNotExists(String outputFile) {
-        File registry = new File(outputFile);
+    private void initializeOutputFileIfNotExists() {
+        File registry = new File(output);
         try {
             boolean created = registry.exists();
             if (!created) registry.createNewFile();
@@ -94,7 +98,7 @@ public class List implements Serializable {
         }
     }
 
-    private ArrayList<String> getList() {
+    public ArrayList<String> getList() {
         return list;
     }
 }

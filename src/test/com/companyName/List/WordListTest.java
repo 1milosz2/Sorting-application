@@ -1,4 +1,4 @@
-package com.companyName.List;
+package com.companyName.list;
 
 class WordListTest {
 

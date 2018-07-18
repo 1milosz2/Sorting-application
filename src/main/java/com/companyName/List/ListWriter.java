@@ -1,12 +1,13 @@
-package com.companyName.List;
+package com.companyName.list;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 public class ListWriter {
 
-    public void flush(WordList list, String output) {
+    public static void flush(List<String> list, String output) {
         initializeOutputFileIfNotExists(output);
         try {
             FileWriter writer = new FileWriter(output);
@@ -18,16 +19,11 @@ public class ListWriter {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String communicate = "List have been exported to an external file ";
+        String communicate = "list have been exported to an external file ";
         System.out.println(communicate + output);
     }
 
-    public void flush(WordList list) {
-         String outputFileName = "sorted.txt";
-         flush(list,outputFileName);
-            }
-
-    private void initializeOutputFileIfNotExists(String outputFileName) {
+    private static void initializeOutputFileIfNotExists(String outputFileName) {
         File registry = new File(outputFileName);
         try {
             boolean created = registry.exists();

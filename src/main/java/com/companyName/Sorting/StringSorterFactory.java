@@ -1,37 +1,18 @@
-package com.companyName.Sorting;
+package com.companyName.sorting;
 
 public class StringSorterFactory {
 
-    public StringSorterFactory() {
-    }
-
-    public static StringSorter getStringSorter(String[] args) {
-        SortingStrategy command = resolveCommand(args);
-        StringSorter ss = null;
-        switch (command) {
+    public static StringSorter getStringSorter(SortingStrategy strategy) {
+        switch (strategy) {
             case BUBBLE:
-                ss = new BubbleStringSorter();
-                break;
+                return new BubbleStringSorter();
             case INSERTION:
-                ss = new InsertionStringSorter();
-                break;
+                return new InsertionStringSorter();
             case SELECTION:
-                ss = new SelectionStringSorter();
-                break;
+                return new SelectionStringSorter();
         }
-        return ss;
-    }
-
-    private static SortingStrategy resolveCommand(String[] args) {
-        String c = args[0];
-        if ("BUBBLE".equals(c)) {
-            return SortingStrategy.BUBBLE;
-        } else if ("INSERTION".equals(c)) {
-            return SortingStrategy.INSERTION;
-        } else if ("SELECTION".equals(c)) {
-            return SortingStrategy.SELECTION;
-        } else
-            throw new IllegalArgumentException("BUBBLE, INSERTION or SELECTION command expected");
+        //throw exception
+        return null;
     }
 
 }

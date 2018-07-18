@@ -1,9 +1,9 @@
-package com.companyName.Sorting;
+package com.companyName.sorting;
 
 import java.util.List;
 
 public interface StringSorter {
 
-    public void sort (List<String> l);
+    void sort(List<String> l);
 
 }

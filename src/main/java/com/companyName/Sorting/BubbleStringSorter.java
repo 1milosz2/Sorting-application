@@ -1,4 +1,4 @@
-package com.companyName.Sorting;
+package com.companyName.sorting;
 
 import java.util.Collections;
 import java.util.List;
